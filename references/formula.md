@@ -20,7 +20,7 @@ the last line.
 Recurring cast: you (second person), a best friend, a little sister, mum. In our cast: Pip is "you", Mo is the best
 friend, and `sis`, `mom` and `suit` are on the rig for beats 5 and 6.
 
-## The 15 to 25 second shape
+## The Full shape (15 to 25 seconds, 45-65 words)
 
 | Beat | Seconds | What it does | Example (rewind) |
 |---|---|---|---|
@@ -31,6 +31,25 @@ friend, and `sis`, `mom` and `suit` are on the rig for beats 5 and 6.
 
 A longer cut (40 to 60 s) adds beat 4 properly (the fact, then its consequence on screen), the suit noticing (5)
 and the sister in danger (6), and ends on "Part 1".
+
+## The Short shape (8 to 12 seconds, 20-35 words)
+
+For Shorts, Reels and TikTok. Snappier, punchier, built for the thumb-stop.
+
+| Beat | Seconds | What it does | Example (rewind) |
+|---|---|---|---|
+| 1. Cold open | 0 to 5 | **Two** quick demos (not three): the small problem, the power, the win. Faster cuts, no breathing room. | "Coffee falls. Rewind. Caught." x2 |
+| 2. Premise | 5 to 7 | The title card, straight into the rule. | "What if you could rewind ten seconds?" |
+| 4-7. The turn | last 2 to 4 s | One line: the cost and the question, folded together. No room for "That's real." — the fact lands in the picture. | "It's about to ruin everything." |
+
+Beat 3 (Fun) is dropped or folded into the second demo. The Short shape trades depth for impact: fewer words, faster
+cuts (30+ per minute), every shot a close-up or medium (no time for establishing wides). The script's pace should
+feel like a trailer — each line lands like a punch.
+
+- **20 to 35 words** lands at 8 to 12 seconds after voice.py tightens the pauses.
+- **5 to 8 shots** (vs. 9-14 for Full).
+- **No hold over 2 s** — keep it moving.
+- The title card can be a single line instead of two if it reads faster.
 
 ## Writing rules
 

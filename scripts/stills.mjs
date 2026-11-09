@@ -1,7 +1,7 @@
 // Step 4: the storyboard stills. Renders one still per shot at its key frame from the <Id>Board composition,
 // bundling once. Run from the studio folder:
-//   node <skill>/scripts/stills.mjs <slug> [S1 S4 ...] [--scale 0.5]
-// Writes out/<slug>/board/<shot>.png. With shot ids, renders only those (after a fix).
+//   node <skill>/scripts/stills.mjs <slug> [S1 S4 ...] [--scale 0.5] [--secondary] [--dir <dir>]
+// Writes out/<slug>/board/<shot>.png (or board-secondary/<shot>.png with --secondary). With shot ids, renders only those (after a fix).
 // Also: node <skill>/scripts/stills.mjs <slug> --frames 120 300   renders frames of the main composition
 // (out/<slug>/frames/f0120.png), for checking a moment inside a shot.
 import fs from 'node:fs';
@@ -18,7 +18,11 @@ const slug = args[0];
 const scaleAt = args.indexOf('--scale');
 const scale = scaleAt >= 0 ? Number(args[scaleAt + 1]) : 0.5;
 const framesAt = args.indexOf('--frames');
-const rest = args.slice(1).filter((a, i, all) => !a.startsWith('--') && all[i - 1] !== '--scale');
+const secAt = args.indexOf('--secondary');
+const dirAt = args.indexOf('--dir');
+const targetBoard = dirAt >= 0 ? args[dirAt + 1] : (secAt >= 0 ? 'board-secondary' : 'board');
+
+const rest = args.slice(1).filter((a, i, all) => !a.startsWith('--') && all[i - 1] !== '--scale' && all[i - 1] !== '--dir');
 const ep = JSON.parse(fs.readFileSync(path.resolve('src/episodes', slug, 'episode.json'), 'utf8'));
 const tl = JSON.parse(fs.readFileSync(path.resolve('src/episodes', slug, 'timeline.json'), 'utf8'));
 
@@ -33,7 +37,7 @@ if (framesAt >= 0) {
     process.stdout.write(`${fr} `);
   }
 } else {
-  const outDir = path.resolve('out', slug, 'board');
+  const outDir = path.resolve('out', slug, targetBoard);
   fs.mkdirSync(outDir, { recursive: true });
   const composition = await selectComposition({ serveUrl, id: `${ep.id}Board` });
   const want = rest.length ? rest : tl.shots.map((s) => s.id);

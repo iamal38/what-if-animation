@@ -4,6 +4,8 @@ labelled, so a walk, a fall, a catch or a reversal can be read at a glance witho
 python <skill>/scripts/motiongrid.py <slug> [S3 S5 ...] [--video out/<slug>/<slug>-raw.mp4] [--step 2]
 python <skill>/scripts/motiongrid.py <slug> --range 120:180
 Writes out/<slug>/motion/<shot>.jpg (every segment of that shot, in order) or out/<slug>/motion/range-<a>-<b>.jpg
+
+Adapts grid layout for 16:9 (landscape) and 9:16 (vertical) episodes based on the format in episode.json.
 """
 import json, subprocess, sys
 
@@ -18,6 +20,12 @@ args = sys.argv[2:]
 def opt(name, default=None):
     return args[args.index(name) + 1] if name in args else default
 
+
+# Detect aspect ratio from episode.json
+ep = json.loads((ep_dir(slug) / 'episode.json').read_text(encoding='utf-8'))
+fmt = ep.get('format', {})
+aspect = fmt.get('aspect', '16:9')
+is_vertical = aspect == '9:16'
 
 video = opt('--video', str(out_dir(slug) / f'{slug}-raw.mp4'))
 step = int(opt('--step', 2))
@@ -43,12 +51,18 @@ try:
     font = ImageFont.truetype('arial.ttf', 22)
 except OSError:
     font = ImageFont.load_default(22)
-W, H, cols = 480, 270, 6
+
+# Adaptive grid sizes based on aspect ratio
+if is_vertical:
+    W, H, cols = 270, 480, 8   # portrait thumbnails, more columns
+else:
+    W, H, cols = 480, 270, 6   # landscape thumbnails
+
 for name, frames in jobs:
     rows = (len(frames) + cols - 1) // cols
     sheet = Image.new('RGB', (cols * W, rows * H))
     for i, f in enumerate(frames):
-        raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', video, '-vf', f'select=eq(n\\,{f}),scale={W}:{H}', '-vframes', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'], capture_output=True, check=True).stdout
+        raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', video, '-vf', f'select=eq(n\\\\,{f}),scale={W}:{H}', '-vframes', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'], capture_output=True, check=True).stdout
         tmp = out / '_f.png'
         tmp.write_bytes(raw)
         im = Image.open(tmp).convert('RGB')

@@ -227,18 +227,18 @@ export const TapeLines: React.FC<{ f: number }> = ({ f }) => {
  * "COPY AND PASTE ANYTHING?"). Each line pops on (line 1 at t = 2, line 2 at t = 5). `accent` is one word in line 2
  * that pulses at accentT. Put it over a wide establishing shot, upper third.
  */
-export const TitleCard: React.FC<{ t: number; lines: [string, string]; accent?: string; accentT?: number; y?: number; size?: number }> = ({ t, lines, accent, accentT = 34, y = 175, size = 128 }) => {
+export const TitleCard: React.FC<{ t: number; lines: [string, string]; accent?: string; accentT?: number; x?: number; y?: number; size?: number }> = ({ t, lines, accent, accentT = 34, x = 960, y = 175, size = 128 }) => {
   const pop = (d: number) => backOut(clamp((t - d) / 9));
   const pulse = t >= accentT && t < accentT + 12 ? 1 + 0.14 * Math.sin(((t - accentT) / 12) * Math.PI) : 1;
   const words = lines[1].split(' ');
   return (
     <g>
-      <g transform={`translate(960 ${y}) scale(${pop(2)})`}>
+      <g transform={`translate(${x} ${y}) scale(${pop(2)})`}>
         <text textAnchor="middle" fontFamily={FONT.title} fontWeight={600} fontSize={size / 2} letterSpacing={4} fill="#F6EFE3" stroke="#1A1230" strokeWidth={8} paintOrder="stroke">
           {lines[0]}
         </text>
       </g>
-      <g transform={`translate(960 ${y + size - 3}) scale(${pop(5)})`}>
+      <g transform={`translate(${x} ${y + size - 3}) scale(${pop(5)})`}>
         <text textAnchor="middle" fontFamily={FONT.title} fontWeight={700} fontSize={size} fill={C.orange} stroke="#1A1230" strokeWidth={12} paintOrder="stroke" style={{ filter: 'drop-shadow(0 0 22px rgba(255,138,61,0.55))' }}>
           {words.map((w, i) => (
             <tspan key={i} style={w.replace(/[^\w]/g, '') === accent ? { fontSize: size * pulse } : undefined} fill={w.replace(/[^\w]/g, '') === accent ? '#FFE27A' : undefined}>

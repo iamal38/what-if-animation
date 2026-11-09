@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { clamp, lerp } from './anim';
 import { KitDefs } from './kit';
 import { SetDefs } from './light';
@@ -82,36 +82,45 @@ const fxAt = (tl: Timeline, f: number) => {
 };
 
 /** Vignette and a fine grain that changes on twos, to take the vector edge off (the genre's finish). */
-const Grade: React.FC<{ f: number; grain: boolean; vignette: boolean }> = ({ f, grain, vignette }) => (
-  <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-    <defs>
-      <radialGradient id="epVig" cx="50%" cy="50%" r="75%">
-        <stop offset="55%" stopColor="#000" stopOpacity={0} />
-        <stop offset="100%" stopColor="#000" stopOpacity={0.55} />
-      </radialGradient>
-      <filter id="epGrain" x="0" y="0" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={Math.floor(f / 2) % 97} />
-        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0" />
-      </filter>
-    </defs>
-    {vignette ? <rect width="1920" height="1080" fill="url(#epVig)" /> : null}
-    {grain ? <rect width="1920" height="1080" filter="url(#epGrain)" /> : null}
-  </svg>
-);
+const Grade: React.FC<{ f: number; grain: boolean; vignette: boolean }> = ({ f, grain, vignette }) => {
+  const { width, height } = useVideoConfig();
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+      <defs>
+        <radialGradient id="epVig" cx="50%" cy="50%" r="75%">
+          <stop offset="55%" stopColor="#000" stopOpacity={0} />
+          <stop offset="100%" stopColor="#000" stopOpacity={0.55} />
+        </radialGradient>
+        <filter id="epGrain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={Math.floor(f / 2) % 97} />
+          <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0" />
+        </filter>
+      </defs>
+      {vignette ? <rect width={width} height={height} fill="url(#epVig)" /> : null}
+      {grain ? <rect width={width} height={height} filter="url(#epGrain)" /> : null}
+    </svg>
+  );
+};
 
 /** One shot drawn in the shared defs (filters, gradients), in a 1920 x 1080 world. */
-export const ShotFrame: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <svg width={1920} height={1080} viewBox="0 0 1920 1080">
-    <KitDefs />
-    <SetDefs />
-    {children}
-  </svg>
-);
+export const ShotFrame: React.FC<{ children: React.ReactNode; width?: number; height?: number }> = ({ children, width: wProp, height: hProp }) => {
+  const cfg = useVideoConfig();
+  const width = wProp ?? cfg.width;
+  const height = hProp ?? cfg.height;
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <KitDefs />
+      <SetDefs />
+      {children}
+    </svg>
+  );
+};
 
 export type EpisodeProps = { timeline: Timeline; shots: ShotMap; looks?: Record<string, LookDef>; grain?: boolean; vignette?: boolean; bg?: string };
 
 export const Episode: React.FC<EpisodeProps> = ({ timeline: tl, shots, looks = {}, grain = true, vignette = true, bg = '#0E0C1E' }) => {
   const f = useCurrentFrame();
+  const { width, height } = useVideoConfig();
   const seg = segAt(tl, f);
   const Shot = shots[seg.shot];
   const info = tl.shots.find((s) => s.id === seg.shot);
@@ -128,7 +137,7 @@ export const Episode: React.FC<EpisodeProps> = ({ timeline: tl, shots, looks = {
       </AbsoluteFill>
       <Grade f={f} grain={grain} vignette={vignette} />
       {def?.Overlay && run ? (
-        <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{ position: 'absolute', inset: 0, opacity: lv }}>
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', inset: 0, opacity: lv }}>
           <def.Overlay f={f} lv={lv} p={clamp((f - run.a) / (run.b - run.a))} n={run.n} />
         </svg>
       ) : null}
@@ -154,8 +163,10 @@ export const Board: React.FC<{ timeline: Timeline; shots: ShotMap; grain?: boole
 };
 
 /** Bundle an episode for the registry: the main composition and its storyboard. */
-export const defineEpisode = (id: string, p: EpisodeProps) => ({
+export const defineEpisode = (id: string, p: EpisodeProps & { width?: number; height?: number }) => ({
   id,
+  width: p.width,
+  height: p.height,
   total: p.timeline.total,
   shotCount: p.timeline.shots.length,
   Main: () => <Episode {...p} />,

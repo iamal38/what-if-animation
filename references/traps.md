@@ -47,9 +47,34 @@ shot or a character.
   in `episodes/copy-paste/shots.tsx` do (that's how the preview run fed Mo a slice and put a phone to Pip's ear). In a
   medium, act it with the head and a jolt instead.
 - **A grade on a whole shot needs a screen-sized filter box.** Filter the outer group with `filterUnits="userSpaceOnUse"`
-  and a 0..1920 x 0..1080 region: the default box is the content's, and sets draw far past the frame.
+  and a 0..WIDTH x 0..HEIGHT region (landscape: 0..1920 x 0..1080; vertical: 0..1080 x 0..1920): the default box is
+  the content's, and sets draw far past the frame.
 - **A colour grade lifts black.** The preview look's matrix turned a black screen navy; draw true black outside the
   graded group.
+
+## Format-specific traps (9:16 vertical)
+
+- **Wides lose the sides.** A room designed for 16:9 shows its full width at zoom 1; in 9:16, the same zoom only
+  shows 56% of the width. Zoom out further (0.55-0.8) or accept tighter framing.
+- **Platform UI covers the edges.** YouTube Shorts, Reels and TikTok overlay buttons on the bottom ~200 px and top
+  ~120 px. Never put text, faces or important props there.
+- **Title card needs smaller font.** At 1080 px wide (vs. 1920), a 128 px title runs off the edge. Use ~56 px for
+  the main line, ~40 px for the subtitle.
+- **Horizontal spreads don't read.** A row of three cookies reads in landscape but stacks in vertical. Arrange
+  props vertically (a tower of cookies, one above the other).
+- **The ground line drops.** At y ≈ 1520 (vs. 820), characters stand much lower. Rooms need more ceiling and
+  vertical dressing or the top half is empty.
+- **`filterUnits` region must match.** A 0..1920 x 0..1080 filter box on a 1080 x 1920 canvas leaves the bottom
+  840 px unfiltered. Always use 0..WIDTH x 0..HEIGHT.
+
+## Dual-format traps (when "both" is chosen)
+
+- **Camera centre must change.** A shot centred at (960, 580) in landscape needs to re-centre at (540, 1100) in
+  vertical, or the subject is off-screen. Always use the `vertical` flag to switch cameras.
+- **Over-the-shoulder fills differently.** In landscape the foreground figure fills ⅓ of the width; in vertical it
+  should fill ½ or more — the narrow frame needs a bigger silhouette.
+- **Test both boards.** A shot that passes the landscape storyboard check can fail the vertical check (subject
+  cropped, text in unsafe zone). Always render and check both storyboards.
 
 ## Motion
 
@@ -87,3 +112,5 @@ shot or a character.
   can lag. Re-read it before reporting.
 - **Remotion Studio can't drag these shots around:** they're computed from the timeline, so retime in
   `episode.json` and re-run `plan.py`.
+- **Dual export doubles the render time but not the cost.** Voice and sound clips are generated once; only the
+  Remotion render runs twice (once per aspect ratio). Budget 5 minutes for a dual render.

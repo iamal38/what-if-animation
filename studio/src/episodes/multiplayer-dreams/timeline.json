@@ -1,0 +1,465 @@
+{
+ "slug": "multiplayer-dreams",
+ "title": "WHAT IF DREAMS WERE MULTIPLAYER?",
+ "fps": 30,
+ "total": 1959,
+ "segments": [
+  {
+   "shot": "S1",
+   "a": 0,
+   "b": 80,
+   "t0": 0,
+   "t1": 80,
+   "line": "You're dreaming you can fly. Suddenly, your little"
+  },
+  {
+   "shot": "S2",
+   "a": 80,
+   "b": 170,
+   "t0": 0,
+   "t1": 90,
+   "line": "sister drops from the sky riding a giant goldfish."
+  },
+  {
+   "shot": "S3",
+   "a": 170,
+   "b": 233,
+   "t0": 0,
+   "t1": 63,
+   "line": "Because her bedroom is three meters away."
+  },
+  {
+   "shot": "S4",
+   "a": 233,
+   "b": 328,
+   "t0": 0,
+   "t1": 95,
+   "line": "Next night, Mo sleeps on your floor. Your dream becomes"
+  },
+  {
+   "shot": "S5",
+   "a": 328,
+   "b": 387,
+   "t0": 0,
+   "t1": 59,
+   "line": "a laser battle with infinite pizza."
+  },
+  {
+   "shot": "S6",
+   "a": 387,
+   "b": 499,
+   "t0": 0,
+   "t1": 112,
+   "line": "Third night, you walk into your secret dream vault. And your sister"
+  },
+  {
+   "shot": "S7",
+   "a": 499,
+   "b": 555,
+   "t0": 0,
+   "t1": 56,
+   "line": "is standing there reading your diary."
+  },
+  {
+   "shot": "S8",
+   "a": 555,
+   "b": 615,
+   "t0": 0,
+   "t1": 60,
+   "line": "What if dreams were multiplayer? The"
+  },
+  {
+   "shot": "S8B",
+   "a": 615,
+   "b": 762,
+   "t0": 0,
+   "t1": 147,
+   "line": "rule: you share a dream with whoever is sleeping physically closest to you. At first, it's the"
+  },
+  {
+   "shot": "S9",
+   "a": 762,
+   "b": 806,
+   "t0": 0,
+   "t1": 44,
+   "line": "ultimate co- op game."
+  },
+  {
+   "shot": "S9B",
+   "a": 806,
+   "b": 944,
+   "t0": 0,
+   "t1": 138,
+   "line": "Sleepovers become superhero movies. You build entire worlds before breakfast."
+  },
+  {
+   "shot": "S10",
+   "a": 944,
+   "b": 1048,
+   "t0": 0,
+   "t1": 104,
+   "line": "Until you take an overnight red- eye flight. In REM sleep, your"
+  },
+  {
+   "shot": "S11",
+   "a": 1048,
+   "b": 1144,
+   "t0": 0,
+   "t1": 96,
+   "line": "amygdala fires thirty percent hotter than when awake, while"
+  },
+  {
+   "shot": "S11B",
+   "a": 1144,
+   "b": 1246,
+   "t0": 0,
+   "t1": 102,
+   "line": "your brainstem paralyzes your muscles. That's real. Inside"
+  },
+  {
+   "shot": "S12",
+   "a": 1246,
+   "b": 1312,
+   "t0": 0,
+   "t1": 66,
+   "line": "a cabin six meters wide, two hundred"
+  },
+  {
+   "shot": "S12B",
+   "a": 1312,
+   "b": 1411,
+   "t0": 0,
+   "t1": 99,
+   "line": "passengers enter REM sleep together. One person has a"
+  },
+  {
+   "shot": "S13",
+   "a": 1411,
+   "b": 1446,
+   "t0": 0,
+   "t1": 35,
+   "line": "nightmare. And"
+  },
+  {
+   "shot": "S14",
+   "a": 1446,
+   "b": 1521,
+   "t0": 0,
+   "t1": 75,
+   "line": "the terror infects the entire plane. Two hundred"
+  },
+  {
+   "shot": "S15",
+   "a": 1521,
+   "b": 1590,
+   "t0": 0,
+   "t1": 69,
+   "line": "strangers trapped in one monster, unable"
+  },
+  {
+   "shot": "S15B",
+   "a": 1590,
+   "b": 1652,
+   "t0": 0,
+   "t1": 62,
+   "line": "to scream, unable to wake up. When you"
+  },
+  {
+   "shot": "S16",
+   "a": 1652,
+   "b": 1767,
+   "t0": 0,
+   "t1": 115,
+   "line": "land, men in dark suits seal the gate. They know what happened. And"
+  },
+  {
+   "shot": "S17",
+   "a": 1767,
+   "b": 1872,
+   "t0": 0,
+   "t1": 105,
+   "line": "tonight, your little sister just fell asleep next door with a fever. And"
+  },
+  {
+   "shot": "S18",
+   "a": 1872,
+   "b": 1959,
+   "t0": 0,
+   "t1": 87,
+   "line": "the walls are starting to melt. Part one."
+  }
+ ],
+ "shots": [
+  {
+   "id": "S1",
+   "size": "wide, floating",
+   "key": 15,
+   "len": 80,
+   "first": 0,
+   "line": "You're dreaming you can fly. Suddenly, your little",
+   "note": "Pip floating through purple dream sky in superhero cape"
+  },
+  {
+   "id": "S2",
+   "size": "medium, high",
+   "key": 20,
+   "len": 90,
+   "first": 80,
+   "line": "sister drops from the sky riding a giant goldfish.",
+   "note": "Sis drops from above riding a giant goldfish with goggles"
+  },
+  {
+   "id": "S3",
+   "size": "schematic cutaway",
+   "key": 20,
+   "len": 63,
+   "first": 170,
+   "line": "Because her bedroom is three meters away.",
+   "note": "Apartment cutaway: Pip asleep in bed, Sis across hall, '3.2 m' distance HUD ring"
+  },
+  {
+   "id": "S4",
+   "size": "medium low",
+   "key": 15,
+   "len": 95,
+   "first": 233,
+   "line": "Next night, Mo sleeps on your floor. Your dream becomes",
+   "note": "Mo sleeping on mattress on floor next to Pip's bed, snoring"
+  },
+  {
+   "id": "S5",
+   "size": "wide, chaotic",
+   "key": 25,
+   "len": 59,
+   "first": 328,
+   "line": "a laser battle with infinite pizza.",
+   "note": "Dream transforms: giant floating pizza, Mo firing laser blaster"
+  },
+  {
+   "id": "S6",
+   "size": "medium",
+   "key": 18,
+   "len": 112,
+   "first": 387,
+   "line": "Third night, you walk into your secret dream vault. And your sister",
+   "note": "Pip approaches heavy steel vault door glowing cyan labeled 'SECRETS'"
+  },
+  {
+   "id": "S7",
+   "size": "medium, inside vault",
+   "key": 20,
+   "len": 56,
+   "first": 499,
+   "line": "is standing there reading your diary.",
+   "note": "Sis sitting on chest reading Pip's glowing secret diary with a grin"
+  },
+  {
+   "id": "S8",
+   "size": "wide establishing",
+   "key": 25,
+   "len": 60,
+   "first": 555,
+   "line": "What if dreams were multiplayer? The",
+   "note": "Title card: WHAT IF DREAMS WERE MULTIPLAYER?"
+  },
+  {
+   "id": "S8B",
+   "size": "HUD radar",
+   "key": 20,
+   "len": 147,
+   "first": 615,
+   "line": "rule: you share a dream with whoever is sleeping physically closest to you. At first, it's the",
+   "note": "Proximity radar showing nearest sleeping person within 5 meters"
+  },
+  {
+   "id": "S9",
+   "size": "wide dynamic",
+   "key": 22,
+   "len": 44,
+   "first": 762,
+   "line": "ultimate co- op game.",
+   "note": "Pip and Mo summon glowing neon skyscrapers together like a co-op game"
+  },
+  {
+   "id": "S9B",
+   "size": "dynamic flying",
+   "key": 20,
+   "len": 138,
+   "first": 806,
+   "line": "Sleepovers become superhero movies. You build entire worlds before breakfast.",
+   "note": "Pip and Mo flying side by side through floating neon rings"
+  },
+  {
+   "id": "S10",
+   "size": "wide exterior night",
+   "key": 18,
+   "len": 104,
+   "first": 944,
+   "line": "Until you take an overnight red- eye flight. In REM sleep, your",
+   "note": "Airplane flying through dark storm clouds at night, navigation lights blinking"
+  },
+  {
+   "id": "S11",
+   "size": "medical schematic",
+   "key": 25,
+   "len": 96,
+   "first": 1048,
+   "line": "amygdala fires thirty percent hotter than when awake, while",
+   "note": "Brain cross-section: amygdala glowing +30% heat map in REM sleep"
+  },
+  {
+   "id": "S11B",
+   "size": "schematic lock",
+   "key": 22,
+   "len": 102,
+   "first": 1144,
+   "line": "your brainstem paralyzes your muscles. That's real. Inside",
+   "note": "Brainstem motor block locked with chain icon, 'THAT'S REAL' tag"
+  },
+  {
+   "id": "S12",
+   "size": "interior high angle",
+   "key": 24,
+   "len": 66,
+   "first": 1246,
+   "line": "a cabin six meters wide, two hundred",
+   "note": "Airplane cabin cutaway: rows of sleeping passengers with connected dream tethers"
+  },
+  {
+   "id": "S12B",
+   "size": "seat row insert",
+   "key": 20,
+   "len": 99,
+   "first": 1312,
+   "line": "passengers enter REM sleep together. One person has a",
+   "note": "Tight seats cutaway: 200 sleeping passengers in 6-meter cylinder"
+  },
+  {
+   "id": "S13",
+   "size": "close-up",
+   "key": 18,
+   "len": 35,
+   "first": 1411,
+   "line": "nightmare. And",
+   "note": "Passenger sweating in seat, dark red shadow tendril creeping from their eyes"
+  },
+  {
+   "id": "S14",
+   "size": "wide chaos",
+   "key": 24,
+   "len": 75,
+   "first": 1446,
+   "line": "the terror infects the entire plane. Two hundred",
+   "note": "Entire cabin engulfed in red nightmare smoke, giant shadow beast looming"
+  },
+  {
+   "id": "S15",
+   "size": "close up",
+   "key": 22,
+   "len": 69,
+   "first": 1521,
+   "line": "strangers trapped in one monster, unable",
+   "note": "Pip's face locked in sleep paralysis, glowing red reflections, mouth frozen"
+  },
+  {
+   "id": "S15B",
+   "size": "macro eye",
+   "key": 16,
+   "len": 62,
+   "first": 1590,
+   "line": "to scream, unable to wake up. When you",
+   "note": "Macro eye extreme close-up, dilated pupil reflecting red claws, unable to wake up"
+  },
+  {
+   "id": "S16",
+   "size": "wide cinematic",
+   "key": 20,
+   "len": 115,
+   "first": 1652,
+   "line": "land, men in dark suits seal the gate. They know what happened. And",
+   "note": "Airport jet bridge: men in black suits and sunglasses standing by glowing exit"
+  },
+  {
+   "id": "S17",
+   "size": "medium",
+   "key": 22,
+   "len": 105,
+   "first": 1767,
+   "line": "tonight, your little sister just fell asleep next door with a fever. And",
+   "note": "Sister in bed, fever flush, digital thermometer showing 104 F"
+  },
+  {
+   "id": "S18",
+   "size": "medium wide",
+   "key": 25,
+   "len": 87,
+   "first": 1872,
+   "line": "the walls are starting to melt. Part one.",
+   "note": "Pip frozen in doorway, walls dripping black and red, glowing eyes opening: PART 1"
+  }
+ ],
+ "fx": [
+  {
+   "kind": "flash",
+   "color": "#7FD4FF",
+   "o": 0.4,
+   "f": 82
+  },
+  {
+   "kind": "flash",
+   "color": "#FF8A3D",
+   "o": 0.35,
+   "f": 330
+  },
+  {
+   "kind": "flash",
+   "color": "#FFE27A",
+   "o": 0.3,
+   "f": 501
+  },
+  {
+   "kind": "flash",
+   "color": "#7FD4FF",
+   "o": 0.5,
+   "f": 557
+  },
+  {
+   "kind": "shake",
+   "amp": 6,
+   "len": 8,
+   "f": 1050
+  },
+  {
+   "kind": "flash",
+   "color": "#FF3B30",
+   "o": 0.5,
+   "f": 1448
+  },
+  {
+   "kind": "shake",
+   "amp": 12,
+   "len": 14,
+   "f": 1450
+  },
+  {
+   "kind": "shake",
+   "amp": 8,
+   "len": 10,
+   "f": 1523
+  },
+  {
+   "kind": "flash",
+   "color": "#FF2A2A",
+   "o": 0.4,
+   "f": 1874
+  }
+ ],
+ "audio": {
+  "voice": "multiplayer-dreams/voice.wav",
+  "sfx": "multiplayer-dreams/sfx.wav",
+  "voiceVol": 0.8,
+  "sfxVol": 0.5165,
+  "music": "multiplayer-dreams/music.wav",
+  "musicVol": 0.1225
+ }
+}

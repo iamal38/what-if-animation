@@ -5,13 +5,18 @@ ffmpeg scene detection. We learn the technique (timing, camera grammar, light); 
 our own. Nothing confirms how the viral channels make their videos, so never say or imply they're made with Claude
 or any other tool.
 
+## Format awareness
+
+Everything below uses the **16:9 (1920 × 1080)** canvas by default. For **9:16 (1080 × 1920)**, see the "Vertical
+framing" section at the end — the same rules apply, but the camera grammar and safe zones shift.
+
 ## Pace
 
-| | The genre | Our target for 15-25 s |
-|---|---|---|
-| Cuts per minute, opening | about 27 (first 90 s) | 27 or more; the cold open can run 40-70 with reversals |
-| Median shot | 2.7 s in the opening | 0.7 to 3 s |
-| Long holds | up to about 12 s, always with action inside | nothing static over about 3 s |
+| | The genre | Full (15-25 s) | Short (8-12 s) |
+|---|---|---|---|
+| Cuts per minute, opening | about 27 (first 90 s) | 27 or more; the cold open can run 40-70 with reversals | 30+ throughout; no slow section |
+| Median shot | 2.7 s in the opening | 0.7 to 3 s | 0.5 to 2 s |
+| Long holds | up to about 12 s, always with action inside | nothing static over about 3 s | nothing static over about 2 s |
 
 - Cuts come from **changing shot size**, not from motion: wide, then a macro insert, then a medium, then a close-up
   of a hand, then a reaction. No two neighbouring shots share a size and angle.
@@ -90,3 +95,76 @@ Pull frame grids of every action shot with `motiongrid.py` and read them like a 
 - The action lands on its word, within about 3 frames.
 - Reversals read backwards (every move derives from `t`, so it does).
 - No pops: a prop never jumps between frames unless it's meant to (a paste, a flash).
+
+---
+
+## Vertical framing (9:16)
+
+When the format is 9:16 (1080 × 1920), the world coordinate system stays 1080 × 1920 units. The same sets, characters
+and light work, but the camera grammar changes:
+
+### Canvas and safe zones
+
+| | 16:9 (landscape) | 9:16 (vertical) |
+|---|---|---|
+| Canvas | 1920 × 1080 | 1080 × 1920 |
+| Ground line | y ≈ 820 | y ≈ 1520 |
+| Title card | upper third (~360 px), 2 lines | upper quarter (~480 px), can be 1 or 2 lines |
+| Title font size | ~64 px | ~56 px (narrower frame) |
+| HUD chips | top corners | centred top or stacked vertically at the side |
+| Safe zone (text/UI) | 120 px inset on all sides | 80 px sides, 200 px top/bottom (platform UI overlaps) |
+
+### Camera differences
+
+| Shot type | 16:9 zoom | 9:16 zoom | Notes |
+|---|---|---|---|
+| Establishing wide | 0.75 – 1.1 | 0.55 – 0.8 | Vertical shows less width; zoom out further or use a narrower room |
+| Medium | 1.6 – 2 | 1.4 – 1.8 | Centre the character; the frame is already tight horizontally |
+| Close-up | 3 – 4.5 | 2.5 – 3.5 | The tall frame gives more vertical headroom |
+| Macro insert | 4 – 6 | 3 – 5 | Objects can be shown in portrait orientation naturally |
+| Over the shoulder | fill ⅓ of frame width | fill ½ of frame width | More dramatic in vertical (foreground figure is bigger) |
+
+### What changes in vertical
+
+- **Favour tighter shots.** The vertical frame crops the sides, so wides lose impact. Use more medium and close-up
+  shots; save the establishing wide for one beat (the title card).
+- **Centre the subject.** In landscape the character can sit at the rule of thirds; in vertical, centre them
+  horizontally and place them in the lower 40-60% of the frame (above the platform's bottom UI bar).
+- **Stack, don't spread.** UI elements (HudChip, Gauge, Dial) should stack vertically along one edge instead of
+  sitting in opposite corners. The title card works as a single wide line or two lines stacked tighter.
+- **The schematic works well vertical.** Icons and labels stack naturally; a `CountUp` number reads huge.
+- **Over-the-shoulder is powerful.** The foreground figure takes the full width and fills the bottom half.
+- **Top-down inserts feel natural.** A phone or a desk from above fits the portrait frame perfectly.
+- **Ground line drops.** At y ≈ 1520 (vs. 820), characters stand in the lower quarter. Rooms need more ceiling
+  and vertical dressing (tall bookcases, pendant lamps, wall art above eye level).
+
+### Vertical storyboard check (step 5, additional)
+
+Run these on top of the main 11-point check:
+
+12. **Subject centred horizontally.** The face or the action is within the centre 60% of the 1080-wide frame.
+13. **Safe from platform UI.** Nothing important in the bottom 200 px (like/comment buttons) or top 120 px
+    (status bar, story progress dots).
+14. **Vertical rhythm.** The frame reads top-to-bottom: sky/ceiling, action zone, ground/floor. The eye flows
+    downward, not left-to-right.
+15. **Title reads on mobile.** The title at ~56 px on 1080-wide: check it on a phone-sized preview.
+
+### Dual-format shots (when "both" is chosen)
+
+Write each shot with two camera setups. The set, poses and light are shared; only `camT` changes:
+
+```tsx
+export const S3: React.FC<ShotProps & { vertical?: boolean }> = ({ t, len, vertical }) => {
+  const cam = vertical
+    ? camT(kf(t, [[0, 540]]), kf(t, [[0, 1100]]), kf(t, [[0, 1.5], [len, 1.7]]))  // 9:16
+    : camT(kf(t, [[0, 960]]), kf(t, [[0, 580]]), kf(t, [[0, 1.8], [len, 2.0]]));   // 16:9
+  return (
+    <g transform={cam}>
+      {/* the same set, characters, light */}
+    </g>
+  );
+};
+```
+
+The engine reads the format from `studio.config.ts` and passes `vertical` to each shot. Storyboard and self-check
+both formats separately.

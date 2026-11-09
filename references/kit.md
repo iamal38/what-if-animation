@@ -1,7 +1,8 @@
 # The kit: building blocks for shots
 
 Everything imports from one place: `import { Study, Hero, poseAt, Marquee, ... } from '../../engine';`. The world is
-1920 x 1080 units; a shot draws in world units and frames them with a camera.
+1920 x 1080 units in landscape (16:9) or 1080 x 1920 units in vertical (9:16); a shot draws in world units and
+frames them with a camera. The active dimensions come from `studio.config.ts` (`WIDTH`, `HEIGHT`).
 
 ## A shot
 
@@ -30,6 +31,62 @@ export const S4: React.FC<ShotProps> = ({ t, len }) => {
 - Draw order is depth: the set, things behind the character, the character, things in front, then `Foreground`.
 - Camera: `camT(cx, cy, zoom)` centres the world point (cx, cy). Wides about 0.75 to 1.1, mediums 1.6 to 2,
   close-ups 3 to 4.5. Move it with `kf` for a push-in or a follow; shake inside a shot with `shake(t, from)`.
+
+## The vertical world (9:16)
+
+When the format is 9:16, the coordinate system is **1080 × 1920** units. Characters and sets are drawn at the same
+scale; only the camera framing adapts:
+
+| | 16:9 (landscape) | 9:16 (vertical) |
+|---|---|---|
+| World units | 1920 × 1080 | 1080 × 1920 |
+| Character hip point (standing centre) | ~(960, 712) | ~(540, 1440) |
+| Ground line | y ≈ 820 | y ≈ 1520 |
+| `camT` centre for a wide | (960, 540) zoom 1 | (540, 960) zoom 0.65 |
+| `camT` centre for a medium | (960, 580) zoom 1.8 | (540, 1100) zoom 1.5 |
+| `camT` centre for a close-up | (face_x, face_y) zoom 3.5 | (face_x, face_y) zoom 2.8 |
+| Title card position | upper third, ~64 px | upper quarter, ~56 px |
+| `filterUnits` region | 0..1920 × 0..1080 | 0..1080 × 0..1920 |
+
+### Building a vertical shot
+
+The same set component works in both orientations — the room's geometry is defined in world coordinates. The camera
+just frames a taller, narrower slice:
+
+```tsx
+// Landscape: wide shot of the study
+<g transform={camT(960, 540, 1.0)}>
+
+// Vertical: the same study, framed taller
+<g transform={camT(540, 960, 0.65)}>
+```
+
+The set is drawn at the same world coordinates; the vertical camera shows more ceiling and floor but less side-to-side.
+For rooms that need more vertical interest, add tall elements (bookcases to the ceiling, pendant lamps, wall art above
+eye level, tall plants).
+
+### Dual-format shots (when "both" is chosen)
+
+Write a shot that takes a `vertical` flag and switches the camera:
+
+```tsx
+export const S2: React.FC<ShotProps & { vertical?: boolean }> = ({ t, len, vertical }) => {
+  const cx = vertical ? 540 : 960;
+  const cy = vertical ? 1100 : 580;
+  const zoom = vertical
+    ? kf(t, [[0, 1.5], [len, 1.7]])
+    : kf(t, [[0, 1.8], [len, 2.0]]);
+  return (
+    <g transform={camT(cx, cy, zoom)}>
+      {/* everything else is identical */}
+    </g>
+  );
+};
+```
+
+The engine sets `vertical = HEIGHT > WIDTH` from `studio.config.ts` and passes it through `ShotProps`. When rendering
+the secondary format, flip `WIDTH` and `HEIGHT` in `studio.config.ts` and re-render — the shots automatically use
+the other camera.
 
 ## The engine (`episode.tsx`)
 
@@ -82,9 +139,14 @@ incoming call: `caller`, `buzz`), `PaperBall`. Add props here when an episode ne
 flat fills, a darker shade on the side away from the light, a warm rim line on the lit edge, a contact shadow.
 
 For inserts, `Tabletop` (`furnish.tsx`) fills the frame with a surface seen from high above (wood or stone), its lit
-front edge at `edge` and the floor blurred below; push `edge` past 1080 for a straight top-down shot. Put props on it
-in screen coordinates and bring a character's arm in from the side of frame where they are in the neighbouring shots
-(the dark sleeve and the mitten, scaled up: see `S2` and `S4` in `episodes/copy-paste/shots.tsx`).
+front edge at `edge` and the floor blurred below; push `edge` past the canvas height (1080 or 1920) for a straight
+top-down shot. Put props on it in screen coordinates and bring a character's arm in from the side of frame where they
+are in the neighbouring shots (the dark sleeve and the mitten, scaled up: see `S2` and `S4` in
+`episodes/copy-paste/shots.tsx`).
+
+**Vertical insert note:** in 9:16, the tall frame means a `Tabletop` insert shows more of the surface vertically.
+Bring the arm in from the bottom of frame (the character is below in the neighbouring shots). Objects arranged
+vertically on the surface read more naturally than a horizontal spread.
 
 ## Sets
 
@@ -98,7 +160,7 @@ idle motion carries across cuts.
 | `Classroom` (`sets/classroom.tsx`) | `CLS = makeRoom({900,470}, back 300-1500 x 130-720)`. Board 426-1054 x 196-524, windows on the left wall, two rows of desks with `Kid`s from behind. `SchoolDesk x` is the hero's desk (y 750); the proof clip's Pip stood at (1260, 760), yaw -0.35. `Kid` with `turn` and `laugh` works as a blurred foreground figure for over-the-shoulder shots. | `board` (your own chalk), `solved`, `wrong`, `laugh` |
 | `Rooftop` (`sets/rooftop.tsx`) | Parapet at y 790, deck below (feet at about y 820). The sun at (`sunX`, `sunY`), r 170, optionally a clock (`clock`, `spin`, `crack`). City in three depths, string lights between poles at x 140 and 1780. | `red` (the turn's red sky), `lightsOut`, `blackout` (city windows go dark in a sweep from the left), `cityLit` (more lit windows: about 2.5 for a blackout), `low` (camera lower: the city and roof drop by `low`, so feet go lower too) |
 | `Kitchen` (`sets/kitchen.tsx`) | Built with the room kit: `KITCHEN = makeRoom({960,500}, back 500-1420 x 330-745, 3.4)`. Counter run along the back wall with a sink under the window (sun at 860, 530), hob and kettle, splashback, open shelves with jars, fridge on the right, wall cabinets and a wall light on the left, two pendants. Characters stand behind the island at w 0.4 (`stand(KITCHEN, u, 0.4)`), then draw `KitchenIsland` (with two bar stools) so it hides their legs; `islandTop(u, d)` is a point on its top. | `veil`, `red` |
-| `Bedroom` (`sets/bedroom.tsx`) | At night, built with the room kit: `BEDROOM = makeRoom({940,500}, back 480-1440 x 320-742, 3.4)`. Bed in the back left corner (headboard on the back wall, u 0.03-0.4, foot at w 0.47), nightstand with the lamp (`LAMP`) and the clock, `WINDOW` 1070-1330 x 374-600 onto the moon and the lit city, fairy lights and posters over the bed, `CAL` (the wall calendar), a dresser under the window, wardrobe on the right wall, door ajar on the left with the hall light, rug, beanbag, trainers. In bed: draw it with `duvet={false}`, then the character at `bedSit(u)`, then `BedDuvet` (with `knees`) over their legs. `bedTop(u, w)` is a point on the mattress. | `clock`, `lamp` (0..1: flicker it, kill it), `crossed` (the calendar), `veil` |
+| `Bedroom` (`sets/bedroom.tsx`) | At night, built with the room kit: `BEDROOM = makeRoom({940,500}, back 480-1440 x 320-742, 3.4)`. Bed in the back left corner (headboard on the back wall, u 0.03-0.4, foot at w 0.47), nightstand with the lamp (`LAMP`) and the clock, `WINDOW` 1070-1330 x 374-600 onto the moon and the lit city, fairy lights and posters over the bed, `WINDOW` 1070-1330 x 374-600, a dresser under the window, wardrobe on the right wall, door ajar on the left with the hall light, rug, beanbag, trainers. In bed: draw it with `duvet={false}`, then the character at `bedSit(u)`, then `BedDuvet` (with `knees`) over their legs. `bedTop(u, w)` is a point on the mattress. | `clock`, `lamp` (0..1: flicker it, kill it), `crossed` (the calendar), `veil` |
 | `Schematic` (`sets/schematic.tsx`) | The science beat's ground: a dark blueprint grid with registration marks. On it: `DrawOn` (a path drawing on), `Arrow`, `SchLabel` (mono, pops on), `CountUp` (a number counting, with commas), `PlantIcon` (tower, wind, solar, dam, factory; lit orange when `on`). `SCH` holds its colours. | |
 
 ## The room kit (`room.tsx`, `furnish.tsx`)
@@ -116,6 +178,11 @@ For a new interior, in this order:
 6. Finish: `<LightVeil id lights={[[x, y, radius], ...]} o={0.42} />` with a hole at each light (`pendantLight(R, u,
    w)` gives a pendant's), then the glows again on top (`Glow`), then `Dust` in the brightest beam.
 7. Characters: `stand(R, u, w)` gives the hip point and scale for someone standing at floor point (u, w).
+
+**Vertical rooms:** the same `makeRoom` call works — the room is defined in abstract coordinates. In 9:16, the camera
+shows a taller vertical slice of it, so the room needs more vertical dressing: taller bookcases, things on the ceiling
+(pendants, fairy lights, hanging plants), wall art above eye level, and a visible floor (the ground line drops to
+y ≈ 1520).
 
 ## Light and atmosphere (`light.tsx`, `kit.tsx`)
 
@@ -144,6 +211,10 @@ All in the mono face on a dark translucent pill, cream text, orange for the live
 | `FocusRings`, `DizzyStars`, `Sparkle` | a realisation, a daze, a glint |
 | `TapeLines f` | VHS lines for time powers (full frame, in a look's overlay) |
 | `FONT.title / ui / hand` | the three faces |
+
+**Vertical UI placement:** in 9:16, position HUD elements centred or along one edge. Avoid placing anything
+in the bottom 200 px (platform buttons) or top 120 px (status bar). `TitleCard` at y ≈ 350 (upper quarter) instead
+of upper third. `HudChip` centred top. `Gauge` and `Dial` on the right edge, stacked vertically.
 
 ## Adding to the kit
 

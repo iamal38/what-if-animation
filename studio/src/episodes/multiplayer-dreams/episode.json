@@ -1,0 +1,197 @@
+{
+ "id": "MultiplayerDreams",
+ "slug": "multiplayer-dreams",
+ "topic": "What if dreams were multiplayer?",
+ "title": [
+  "WHAT IF DREAMS WERE",
+  "MULTIPLAYER?"
+ ],
+ "accent": "MULTIPLAYER?",
+ "power": {
+  "word": "Dream sync",
+  "rule": "you share a dream world with whoever is sleeping physically closest to you",
+  "look": "cyan dream glow, proximity HUD rings, nightmare red distortion"
+ },
+ "script": [
+  {
+   "beat": "1 cold open, demo 1 (flying dream)",
+   "text": "You're dreaming you can fly. Suddenly, your little sister drops from the sky riding a giant goldfish."
+  },
+  {
+   "beat": "1 cold open, demo 1 rule (proximity)",
+   "text": "Because her bedroom is three meters away."
+  },
+  {
+   "beat": "1 cold open, demo 2 (sleepover chaos)",
+   "text": "Next night, Mo sleeps on your floor. Your dream becomes a laser battle with infinite pizza."
+  },
+  {
+   "beat": "1 cold open, demo 3 (awkward secrets)",
+   "text": "Third night, you walk into your secret dream vault. And your sister is standing there reading your diary."
+  },
+  {
+   "beat": "2 premise (title card)",
+   "text": "What if dreams were multiplayer? The rule: you share a dream with whoever is sleeping physically closest to you."
+  },
+  {
+   "beat": "3 the fun (co-op)",
+   "text": "At first, it's the ultimate co-op game. Sleepovers become superhero movies. You build entire worlds before breakfast."
+  },
+  {
+   "beat": "4 the turn: the setup",
+   "text": "Until you take an overnight red-eye flight."
+  },
+  {
+   "beat": "4 the turn: checked science fact",
+   "text": "In REM sleep, your amygdala fires thirty percent hotter than when awake, while your brainstem paralyzes your muscles. That's real."
+  },
+  {
+   "beat": "4 the turn: the disaster",
+   "text": "Inside a cabin six meters wide, two hundred passengers enter REM sleep together. One person has a nightmare. And the terror infects the entire plane. Two hundred strangers trapped in one monster, unable to scream, unable to wake up."
+  },
+  {
+   "beat": "5 government suits notice",
+   "text": "When you land, men in dark suits seal the gate. They know what happened."
+  },
+  {
+   "beat": "6 moral choice / stakes with sister",
+   "text": "And tonight, your little sister just fell asleep next door with a fever."
+  },
+  {
+   "beat": "7 cliffhanger",
+   "text": "And the walls are starting to melt. Part one."
+  }
+ ],
+ "science": [
+  {
+   "claim": "In REM sleep, your amygdala fires thirty percent hotter than when awake.",
+   "working": "Neuroimaging studies (PET and fMRI) measuring cerebral blood flow and glucose metabolism show the limbic system, particularly the amygdala, increases activity by 20% to 33% during REM sleep compared to waking rest (Braun et al., 1997; Maquet et al., 1996), driving hyper-intense emotional dreams.",
+   "source": "Maquet et al., 'Functional neuroanatomy of human rapid-eye-movement sleep and dreaming', Nature 1996; Braun et al., 'Regional cerebral blood flow throughout the sleep-wake cycle', Brain 1997"
+  },
+  {
+   "claim": "Your brainstem paralyzes your muscles in REM sleep.",
+   "working": "During REM sleep, REM atonia prevents enacting dreams via glycinergic and GABAergic motor neuron inhibition originating in the sublaterodorsal nucleus (SLD) and ventromedial medulla.",
+   "source": "Luppi et al., 'The neuronal network of REM sleep sleep-paralysis', Sleep Med Rev 2011"
+  },
+  {
+   "claim": "Cabin six meters wide, two hundred passengers in REM sleep.",
+   "working": "Standard commercial wide-body airliners (e.g. Boeing 787 / Airbus A330) have cabin interior widths of 5.5 to 5.6 meters and seat 200 to 300 passengers within a dense cylinder, placing all passengers within a 3-meter physical radius of neighbors.",
+   "source": "Boeing 787 Airplane Characteristics for Airport Planning; Airbus A330 Aircraft Characteristics"
+  }
+ ],
+ "cast": [
+  "pipHood",
+  "sis",
+  "mo",
+  "suit"
+ ],
+ "shots": [
+  { "id": "S1", "size": "wide, floating", "set": "dream (clouds)", "key": 15, "note": "Pip floating through purple dream sky in superhero cape" },
+  { "id": "S2", "size": "medium, high", "set": "dream (clouds)", "key": 20, "note": "Sis drops from above riding a giant goldfish with goggles" },
+  { "id": "S3", "size": "schematic cutaway", "set": "bedroom (cutaway)", "key": 20, "note": "Apartment cutaway: Pip asleep in bed, Sis across hall, '3.2 m' distance HUD ring" },
+  { "id": "S4", "size": "medium low", "set": "bedroom (floor)", "key": 15, "note": "Mo sleeping on mattress on floor next to Pip's bed, snoring" },
+  { "id": "S5", "size": "wide, chaotic", "set": "dream (pizza galaxy)", "key": 25, "note": "Dream transforms: giant floating pizza, Mo firing laser blaster" },
+  { "id": "S6", "size": "medium", "set": "dream (vault)", "key": 18, "note": "Pip approaches heavy steel vault door glowing cyan labeled 'SECRETS'" },
+  { "id": "S7", "size": "medium, inside vault", "set": "dream (vault)", "key": 20, "note": "Sis sitting on chest reading Pip's glowing secret diary with a grin" },
+  { "id": "S8", "size": "wide establishing", "set": "dreamscape", "key": 25, "note": "Title card: WHAT IF DREAMS WERE MULTIPLAYER?" },
+  { "id": "S8B", "size": "HUD radar", "set": "radar (proximity)", "key": 20, "note": "Proximity radar showing nearest sleeping person within 5 meters" },
+  { "id": "S9", "size": "wide dynamic", "set": "dream (city build)", "key": 22, "note": "Pip and Mo summon glowing neon skyscrapers together like a co-op game" },
+  { "id": "S9B", "size": "dynamic flying", "set": "dream (superhero)", "key": 20, "note": "Pip and Mo flying side by side through floating neon rings" },
+  { "id": "S10", "size": "wide exterior night", "set": "flight (exterior)", "key": 18, "note": "Airplane flying through dark storm clouds at night, navigation lights blinking" },
+  { "id": "S11", "size": "medical schematic", "set": "schematic (amygdala)", "key": 25, "note": "Brain cross-section: amygdala glowing +30% heat map in REM sleep" },
+  { "id": "S11B", "size": "schematic lock", "set": "schematic (brainstem)", "key": 22, "note": "Brainstem motor block locked with chain icon, 'THAT'S REAL' tag" },
+  { "id": "S12", "size": "interior high angle", "set": "flight (cabin)", "key": 24, "note": "Airplane cabin cutaway: rows of sleeping passengers with connected dream tethers" },
+  { "id": "S12B", "size": "seat row insert", "set": "flight (proximity)", "key": 20, "note": "Tight seats cutaway: 200 sleeping passengers in 6-meter cylinder" },
+  { "id": "S13", "size": "close-up", "set": "flight (passenger)", "key": 18, "note": "Passenger sweating in seat, dark red shadow tendril creeping from their eyes" },
+  { "id": "S14", "size": "wide chaos", "set": "flight (nightmare)", "key": 24, "note": "Entire cabin engulfed in red nightmare smoke, giant shadow beast looming" },
+  { "id": "S15", "size": "close up", "set": "dream (paralysis)", "key": 22, "note": "Pip's face locked in sleep paralysis, glowing red reflections, mouth frozen" },
+  { "id": "S15B", "size": "macro eye", "set": "dream (eye)", "key": 16, "note": "Macro eye extreme close-up, dilated pupil reflecting red claws, unable to wake up" },
+  { "id": "S16", "size": "wide cinematic", "set": "airport (gate)", "key": 20, "note": "Airport jet bridge: men in black suits and sunglasses standing by glowing exit" },
+  { "id": "S17", "size": "medium", "set": "bedroom (sis)", "key": 22, "note": "Sister in bed, fever flush, digital thermometer showing 104 F" },
+  { "id": "S18", "size": "medium wide", "set": "bedroom (nightmare)", "key": 25, "note": "Pip frozen in doorway, walls dripping black and red, glowing eyes opening: PART 1" }
+ ],
+ "edit": [
+  { "shot": "S1", "at": "f:0", "from": 0 },
+  { "shot": "S2", "at": "sister", "from": 0 },
+  { "shot": "S3", "at": "Because", "from": 0 },
+  { "shot": "S4", "at": "Next", "from": 0 },
+  { "shot": "S5", "at": "laser", "from": 0 },
+  { "shot": "S6", "at": "Third", "from": 0 },
+  { "shot": "S7", "at": "standing", "from": 0 },
+  { "shot": "S8", "at": "What", "from": 0 },
+  { "shot": "S8B", "at": "rule", "from": 0 },
+  { "shot": "S9", "at": "ultimate", "from": 0 },
+  { "shot": "S9B", "at": "Sleepovers", "from": 0 },
+  { "shot": "S10", "at": "Until", "from": 0 },
+  { "shot": "S11", "at": "amygdala", "from": 0 },
+  { "shot": "S11B", "at": "brainstem", "from": 0 },
+  { "shot": "S12", "at": "cabin", "from": 0 },
+  { "shot": "S12B", "at": "passengers", "from": 0 },
+  { "shot": "S13", "at": "nightmare", "from": 0 },
+  { "shot": "S14", "at": "terror", "from": 0 },
+  { "shot": "S15", "at": "strangers", "from": 0 },
+  { "shot": "S15B", "at": "scream", "from": 0 },
+  { "shot": "S16", "at": "land", "from": 0 },
+  { "shot": "S17", "at": "tonight", "from": 0 },
+  { "shot": "S18", "at": "walls", "from": 0 }
+ ],
+ "fx": [
+  { "at": "S2+2", "kind": "flash", "color": "#7FD4FF", "o": 0.4 },
+  { "at": "S5+2", "kind": "flash", "color": "#FF8A3D", "o": 0.35 },
+  { "at": "S7+2", "kind": "flash", "color": "#FFE27A", "o": 0.3 },
+  { "at": "S8+2", "kind": "flash", "color": "#7FD4FF", "o": 0.5 },
+  { "at": "S11+2", "kind": "shake", "amp": 6, "len": 8 },
+  { "at": "S14+2", "kind": "flash", "color": "#FF3B30", "o": 0.5 },
+  { "at": "S14+4", "kind": "shake", "amp": 12, "len": 14 },
+  { "at": "S15+2", "kind": "shake", "amp": 8, "len": 10 },
+  { "at": "S18+2", "kind": "flash", "color": "#FF2A2A", "o": 0.4 }
+ ],
+ "sound": {
+  "clips": {
+   "sparkle": ["a short bright magical sparkle twinkle, cartoon", 0.8],
+   "pop": ["a cartoon speech bubble pop, short and bright", 0.5],
+   "ding": ["a correct answer ding, bright bell chime", 0.8],
+   "laugh": ["a small classroom of kids bursting out laughing", 1.6],
+   "gasp": ["two young people gasping in surprise at the same moment, cartoon, short", 0.8],
+   "title_boom": ["a cinematic whoosh rising into a deep boom impact", 1.6],
+   "drone_hit": ["a dark ominous low drone hit, deep cinematic horror sting", 2.6],
+   "glitch": ["a short digital glitch, an electric buzz and crackle flickering like an unstable hologram", 1.5],
+   "power_hum": ["a deep electrical power grid hum swelling louder, transformers buzzing, rising", 3.0],
+   "room_tone": ["quiet indoor room tone in the evening, faint distant city hum, no voices", 12.5],
+   "roof_wind": ["a gentle evening breeze on a city rooftop, distant traffic", 7.0],
+   "counter_tick": ["a fast mechanical counter ticking up rapidly, digits rolling over, getting faster", 1.6],
+   "clink": ["a ceramic coffee mug knocked by a hand on a wooden desk, short clink and scrape", 0.7],
+   "music": ["playful quirky cartoon background music, pizzicato strings, glockenspiel and soft bass, light and curious, 110 bpm, no vocals", 17.0]
+  },
+  "music": {
+   "clip": "music",
+   "until": "S10"
+  },
+  "events": [
+   ["S1", "room_tone", 0.12, "onset", "S8"],
+   ["S1+12", "sparkle", 0.35],
+   ["S2+2", "pop", 0.45],
+   ["S2+8", "laugh", 0.35],
+   ["S3+4", "ding", 0.35],
+   ["S4+4", "gasp", 0.3],
+   ["S5+2", "glitch", 0.4],
+   ["S7+2", "sparkle", 0.45],
+   ["S8+2", "title_boom", 0.7, "peak"],
+   ["S9+2", "pop", 0.4],
+   ["S9B+2", "sparkle", 0.4],
+   ["S10", "roof_wind", 0.25, "onset", "S16"],
+   ["S11+2", "drone_hit", 0.5, "peak"],
+   ["S11B+2", "clink", 0.4],
+   ["S13+2", "glitch", 0.5],
+   ["S14+2", "drone_hit", 0.65, "peak"],
+   ["S15+2", "gasp", 0.4],
+   ["S16+2", "power_hum", 0.35],
+   ["S17+2", "counter_tick", 0.35],
+   ["S18+2", "drone_hit", 0.7, "peak"]
+  ],
+  "levels": {
+   "sfx_lu": -1.5,
+   "music_lu": -9.5
+  }
+ }
+}
